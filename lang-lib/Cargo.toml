@@ -1,5 +1,5 @@
 [package]
-name = "lang_rust"
+name = "lang-lib"
 version = "0.1.0"
 authors = ["kamedon <hkamei@gmail.com>"]
 edition = "2018"
