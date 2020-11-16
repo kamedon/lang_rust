@@ -8,3 +8,4 @@ edition = "2018"
 
 [dependencies]
 lang-lib = { path = "../lang-lib" }
+rand = "0.7.3"
