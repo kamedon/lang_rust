@@ -7,15 +7,9 @@ extern crate serde_derive;
 extern crate serde_json;
 
 #[derive(Debug, Serialize, Deserialize)]
-struct Country {
-    title: String
-}
-
-#[derive(Debug, Serialize, Deserialize)]
 struct JaWikiCountry {
     title: String
 }
-
 
 fn main() {
     let reader_file_gz = reader("./assets/jawiki-country.json.gz");
