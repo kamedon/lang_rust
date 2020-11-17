@@ -10,3 +10,4 @@ pub fn n_gram(str: &str, n: usize) -> Vec<&str> {
     let gram: Vec<_> = (0..str.len() - n + 1).map(|index| &str[index..index + n]).collect();
     return gram;
 }
+

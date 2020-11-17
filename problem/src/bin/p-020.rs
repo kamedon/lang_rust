@@ -1,10 +1,5 @@
-use flate2::read;
-use std::error::Error;
-use std::ffi::OsStr;
-use std::fs::File;
-use std::io::{self, BufRead, BufReader, BufWriter, Write};
-use std::path::Path;
-use serde::de::Unexpected::Str;
+use lang_lib::file::reader;
+use std::io::BufRead;
 
 extern crate serde;
 #[macro_use]
@@ -19,19 +14,6 @@ struct Country {
 #[derive(Debug, Serialize, Deserialize)]
 struct JaWikiCountry {
     title: String
-}
-
-pub fn reader(filename: &str) -> Box<dyn BufRead> {
-    let path = Path::new(filename);
-    let file = File::open(&path).unwrap();
-    if path.extension() == Some(OsStr::new("gz")) {
-        Box::new(BufReader::with_capacity(
-            128 * 1024,
-            read::GzDecoder::new(file),
-        ))
-    } else {
-        Box::new(BufReader::with_capacity(128 * 1024, file))
-    }
 }
 
 
