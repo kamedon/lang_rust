@@ -6,21 +6,16 @@ fn main() {
 
 
     let ans: Vec<_> = str.split_whitespace().into_iter().map(|x| {
-        return if x.len() >= 4 {
-            let mut rand_chars: Vec<_> = x.chars().enumerate().filter(|(index, _)| *index != 0 && *index != x.len() - 1).map(|(_, value)| {
-                value
-            }).collect();
+        if x.len() >= 4 {
+            let mut rand_chars: Vec<_> = x[1..x.len() - 1].chars().collect();
             let mut rng = thread_rng();
             rand_chars.shuffle(&mut rng);
             let str: String = rand_chars.iter().collect();
-            let first = x.chars().next().unwrap();
-            let last = x.chars().last().unwrap();
-            let str = format!("{}{}{}", first, str, last);
-
-            str
+            let chars: Vec<_> = x.chars().collect();
+            format!("{}{}{}", chars.first().unwrap(), str, chars.last().unwrap())
         } else {
             String::from(x)
-        };
+        }
     }).collect();
     println!("{:?}", ans);
 }

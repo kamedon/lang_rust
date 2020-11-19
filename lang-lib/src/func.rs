@@ -1,8 +1,8 @@
 pub fn word_n_gram(str: &str, n: usize) -> Vec<Vec<&str>> {
-    let chars: Vec<_> = str.split_whitespace().collect();
+    let words: Vec<_> = str.split_whitespace().collect();
     // let f = |index| chars.iter().skip(index).take(n).copied().collect::<Vec<_>>();
-    let f = |index| chars.iter().skip(index).take(n).map(|x| *x).collect::<Vec<_>>();
-    let gram: Vec<_> = (0..chars.len() - n + 1).map(|index| f(index)).collect();
+    let f = |index| words.iter().skip(index).take(n).map(|x| *x).collect::<Vec<_>>();
+    let gram: Vec<_> = (0..words.len() - n + 1).map(|index| f(index)).collect();
     return gram;
 }
 

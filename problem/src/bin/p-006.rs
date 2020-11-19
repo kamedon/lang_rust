@@ -8,10 +8,15 @@ fn main() {
     let set_y: HashSet<_> = to_hashset(n_gram(str_y, 2));
 
     // 和集合
-    let set: HashSet<_> = set_x.union(&set_y).collect();
-    let set_and: HashSet<_> = set_x.intersection(&set_y).collect();
-    let set_x_y: HashSet<_> = set_x.difference(&set_y).collect();
-    let set_y_x: HashSet<_> = set_y.difference(&set_x).collect();
+    // let set: HashSet<_> = set_x.union(&set_y).collect();
+    let set: HashSet<_> = &set_x | &set_y;
+    // let set_and: HashSet<_> = set_x.intersection(&set_y).collect();
+    let set_and: HashSet<_> = &set_x & &set_y;
+
+    // let set_x_y: HashSet<_> = set_x.difference(&set_y).collect();
+    let set_x_y: HashSet<_> = &set_x - &set_y;
+    // let set_y_x: HashSet<_> = set_y.difference(&set_x).collect();
+    let set_y_x: HashSet<_> = &set_y - &set_x;
     println!("x = {:?}", set_x);
     println!("y = {:?}", set_y);
     println!("x + y = {:?}", set);
