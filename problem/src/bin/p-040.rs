@@ -1,10 +1,6 @@
-use std::fs::File;
-use std::io::{self, BufRead, BufReader};
+use lang_lib::mecab::readFile;
 
 fn main() {
-    for result in BufReader::new(File::open("./assets/neko.txt").unwrap()).lines() {
-        let l = result.unwrap();
-        println!("{}", l);
-    }
-
+    let sentences = readFile("./assets/neko.txt.mecab");
+    println!("{:?}", sentences)
 }
