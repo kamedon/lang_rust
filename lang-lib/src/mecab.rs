@@ -31,7 +31,7 @@ pub fn convert_morpheme(str: &str) -> Morpheme {
     }
 }
 
-pub fn readFile(path: &str) -> Vec<Sentence> {
+pub fn read_file(path: &str) -> Vec<Sentence> {
     let mut sentences: Vec<Sentence> = vec![Sentence { morphemes: vec![] }];
 
     for line in BufReader::new(File::open(path).unwrap()).lines() {

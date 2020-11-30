@@ -1,7 +1,7 @@
-use lang_lib::mecab::readFile;
+use lang_lib::mecab::read_file;
 
 fn main() {
-    let strs: Vec<_> = readFile("./assets/neko.txt.mecab").into_iter().take(30)
+    let strs: Vec<_> = read_file("./assets/neko.txt.mecab").into_iter().take(30)
         .filter(|sentence|
             sentence.morphemes.iter().any(|morpheme| morpheme.pos == "動詞")
         )
