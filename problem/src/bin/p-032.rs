@@ -11,7 +11,7 @@ fn main() {
                     {
                         morpheme.pos == "動詞"
                     })
-                .map(|morpheme| morpheme.surface)
+                .map(|morpheme| morpheme.base)
                 .collect::<Vec<_>>()
         ).collect();
 
