@@ -17,5 +17,4 @@ fn main() {
 
     let mut vec: Vec<(&String, &u32)> = hash_map.iter().collect();
     vec.sort_by(|a, b| b.1.cmp(a.1));
-    println!("{:?}", vec)
-}
+    println!("{:?}", vec);
