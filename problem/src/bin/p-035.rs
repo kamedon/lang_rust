@@ -1,9 +1,10 @@
-use lang_lib::mecab::read_file;
+use lang_lib::mecab::convert_sentences;
 use std::collections::HashMap;
 
 fn main() {
     let mut hash_map: HashMap<&str, u32> = HashMap::new();
-    let sentences = read_file("./assets/neko.txt.mecab");
+    let text = include_str!("../../assets/neko.txt.mecab");
+    let sentences = convert_sentences(&text);
     sentences.iter().for_each(|sentence| {
         sentence.morphemes.iter().for_each(|morpheme| {
             let key = &morpheme.surface;
