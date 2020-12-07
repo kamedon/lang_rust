@@ -1,6 +1,7 @@
-use lang_lib::mecab::read_file;
+use lang_lib::mecab::convert_sentences;
 
 fn main() {
-    let sentences = read_file("./assets/neko.txt.mecab");
+    let text = include_str!("../../assets/neko.txt.mecab");
+    let sentences = convert_sentences(&text);
     println!("{:?}", sentences)
 }
