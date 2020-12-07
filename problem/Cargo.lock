@@ -137,7 +137,13 @@ checksum = "ac74c624d6b2d21f425f752262f42188365d7b8ff1aff74c82e45136510a4857"
 name = "problem"
 version = "0.1.0"
 dependencies = [
+ "itertools",
  "lang-lib",
+ "rand",
+ "regex",
+ "serde",
+ "serde_derive",
+ "serde_json",
 ]
 
 [[package]]
