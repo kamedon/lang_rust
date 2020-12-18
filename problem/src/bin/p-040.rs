@@ -9,19 +9,43 @@ struct Morph<'a> {
 }
 
 #[derive(Debug)]
-struct Sentence<'a> {
-    pub morphs: Vec<Morph<'a>>
+struct Chunk<'a> {
+    pub text: &'a str,
+    // 係り先文節インデックス番号
+    pub dst: u32,
+    // 係り元文節インデックス番号のリスト
+    pub srcs: i32,
+    pub morphs: Vec<Morph<'a>>,
 }
+
+#[derive(Debug)]
+pub struct Sentence<'a> {
+    chunks: Vec<Chunk<'a>>
+}
+
 
 impl<'b> Sentence<'b> {
     pub fn new<'a>() -> Sentence<'a> {
-        Sentence { morphs: vec![] }
+        Sentence {
+            chunks: vec![]
+        }
     }
 }
 
+impl<'b> Chunk<'b> {
+    pub fn new(text: &str, dst: u32, srcs: i32) -> Chunk {
+        Chunk {
+            text,
+            dst,
+            srcs,
+            morphs: vec![],
+        }
+    }
+}
+
+
 impl<'b> Morph<'b> {
     pub fn new(text: &str) -> Morph {
-        println!("{}", text);
         let mut split_text = text.split("\t");
         let surface = split_text.next().unwrap();
         let other = split_text.next().unwrap();
@@ -38,11 +62,12 @@ impl<'b> Morph<'b> {
     }
 }
 
+
 fn main() {
     let text = include_str!("../../assets/ai.ja.txt.parsed");
 
     let mut sentences = vec![Sentence::new()];
-    let re = Regex::new(r"\* (\S+) (\S+) (\S+) (\S+)$").unwrap();
+    let re = Regex::new(r"\* (\S+) (\S+)D (\S+) (\S+)$").unwrap();
 
     for line in text.lines() {
         match line {
@@ -50,9 +75,13 @@ fn main() {
             _ => {
                 match re.captures(line) {
                     None => {
-                        sentences.last_mut().unwrap().morphs.push(Morph::new(line))
+                        sentences.last_mut().unwrap().chunks.last_mut().unwrap().morphs.push(Morph::new(line))
                     }
-                    Some(_) => {}
+                    Some(caps) => {
+                        let dst: u32 = *&caps[1].parse().unwrap();
+                        let srcs: i32 = *&caps[2].parse().unwrap();
+                        sentences.last_mut().unwrap().chunks.push(Chunk::new(line, dst, srcs))
+                    }
                 }
             }
         }
