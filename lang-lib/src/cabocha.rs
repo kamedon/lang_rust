@@ -20,7 +20,7 @@ pub struct Chunk<'a> {
 
 #[derive(Debug)]
 pub struct Sentence<'a> {
-    chunks: Vec<Chunk<'a>>
+    pub chunks: Vec<Chunk<'a>>
 }
 
 
