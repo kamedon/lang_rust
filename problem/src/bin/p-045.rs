@@ -5,14 +5,16 @@ use std::fs::{File, OpenOptions};
 use std::io::{self, Read, Write, BufReader, BufWriter};
 
 fn f<'a>(c: &'a Chunk) -> Vec<&'a str> {
-    c.morphs.iter().filter(|m| m.pos == "助詞").map(|m| m.surface).collect::<Vec<_>>()
+    c.morphs.iter().map(|m| m.surface).collect::<Vec<_>>()
 }
 
 fn main() {
     let sentences = convert_sentences(include_str!("../../assets/ai.ja.txt.parsed"));
     let file = OpenOptions::new()
         .write(true)
-        .open("output/044.txt").unwrap();
+        .truncate(true)
+        .open("output/045.txt")
+        .unwrap();
     let mut writer = BufWriter::new(file);
     for sentence in sentences {
         let chunks = sentence.chunks;
@@ -28,6 +30,7 @@ fn main() {
                         .flatten().join(" ");
 
                     let line = format!("{}\t{}\n", m.base, words);
+                    println!("{}", line);
 
                     writer.write(line.as_bytes()).unwrap();
                 }
